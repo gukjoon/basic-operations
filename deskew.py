@@ -1,6 +1,7 @@
 import skimage.transform
 import math
 import torchvision.transforms as transforms
+import numpy as np
 
 def sort_rect(l):
   mlat = sum(x[0] for x in l) / len(l)
@@ -19,10 +20,23 @@ def deskew(original, dest):
   src = np.array([[width, height], [width, 0], [0, 0], [0, height]])
   width_translate = width / 224.0
   height_translate = height / 224.0
+
   dst = np.array(dest) * np.array([width_translate, height_translate])
 
-  tform3 = skimage.transform.ProjectiveTransform()
-  tform3.estimate(src, dst)
-  warped = np.uint8(skimage.transform.warp(original, tform3) * 255)
+  tform = skimage.transform.ProjectiveTransform()
+  tform.estimate(src, dst)
+  warped = np.uint8(skimage.transform.warp(original, tform) * 255)
 
-  return transforms.ToPILImage()(warped)
+  image = transforms.ToPILImage()(warped)
+
+  target_width = np.maximum(
+                    np.linalg.norm(np.array(dest[1]) - np.array(dest[2])),
+                    np.linalg.norm(np.array(dest[0]) - np.array(dest[3]))
+                 )
+  target_height = np.maximum(
+                    np.linalg.norm(np.array(dest[0]) - np.array(dest[1])),
+                    np.linalg.norm(np.array(dest[2]) - np.array(dest[3]))
+                  )
+  new_width = width
+  new_height = target_height * (width / target_width)
+  return transforms.Resize((int(new_height), int(new_width)))(image)
