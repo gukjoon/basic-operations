@@ -53,7 +53,7 @@ def train(images_generator, labels_generator, network, loss_function, optimizer_
   #   # adjust lr every epoch
   #   if self.scheduler:
   #     self.scheduler.step() 
-  return network
+  yield network
 
 
 # class LoggingContext:
