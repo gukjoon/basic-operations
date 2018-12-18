@@ -3,18 +3,18 @@ import pandas
 import requests
 
 def download_dir(file_gen, id_col, url_col):
-  for file in file_gen:
-    file = file.result
+  for obj in file_gen:
+    file = obj.result
     in_data = pandas.read_csv(file)
     for idx, i in in_data.iterrows():
-      name = file.name + "/" + str(i[id_col]) + ".dat"
+      name = obj.name + "/" + str(i[id_col]) + ".dat"
       url = i[url_col]
       if str(url).startswith("http"):
         print("Downloading " + url)
         res = requests.get(url, stream=True)
         if res.status_code == requests.codes.ok:
           yield PipelineSuccess(
-            file.base, 
+            obj.base, 
             name,
             res.iter_content(chunk_size=1024)
           )
