@@ -55,4 +55,4 @@ def train(images_generator, labels_generator, network, loss_function, optimizer,
       optimizer.step()
       optimizer.zero_grad()
   print('DONE')
-  yield network
+  return network
