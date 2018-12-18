@@ -28,34 +28,34 @@ class ProgressiveLoader:
 
 
 def train(images_generator, labels_generator, network, optimizer, loss_function, epochs):
-    images_generator = (i.result for i in images_generator)
-    labels_generator = (i.result for i in labels_generator)
-    network = network.cuda()
-    optimizer, scheduler = optimizer
-    dataset = ProgressiveLoader(images_generator, labels_generator, [
-        transforms.Resize((224,224)),
-        transforms.ToTensor()
-    ])
+  images_generator = (i.result for i in images_generator)
+  labels_generator = (i.result for i in labels_generator)
+  network = network.cuda()
+  optimizer, scheduler = optimizer
+  dataset = ProgressiveLoader(images_generator, labels_generator, [
+      transforms.Resize((224,224)),
+      transforms.ToTensor()
+  ])
 
-    trainloader = torch.utils.data.DataLoader(
-        dataset, 
-        batch_size=8
-        # num_workers=2
-    )
-    
-    data_size = len(trainloader)
-    
-    for epoch in range(epochs):
-        for i, data in enumerate(trainloader, 0):
-            inputs, labels = data
-            inputs, labels = inputs.cuda(), labels.cuda()
-            outputs = network(inputs)
-            loss = loss_function(outputs, labels)
-            loss.backward()
-            optimizer.step()
-            optimizer.zero_grad()
-    print('DONE')
-    return network
+  trainloader = torch.utils.data.DataLoader(
+    dataset, 
+    batch_size=8
+    # num_workers=2
+  )
+  
+  data_size = len(trainloader)
+  
+  for epoch in range(epochs):
+    for i, data in enumerate(trainloader, 0):
+      inputs, labels = data
+      inputs, labels = inputs.cuda(), labels.cuda()
+      outputs = network(inputs)
+      loss = loss_function(outputs, labels)
+      loss.backward()
+      optimizer.step()
+      optimizer.zero_grad()
+  print('DONE')
+  yield network
 
 #   def save_onnx(self, f):
 #     dummy_input = Variable(torch.randn(4, 3, 224, 224)).cuda()
@@ -63,6 +63,3 @@ def train(images_generator, labels_generator, network, optimizer, loss_function,
 
 #   def save_pth(self, f):
 #     torch.save(self.network, f)
-
-
-
