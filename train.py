@@ -14,6 +14,8 @@ class ProgressiveLoader:
     self.label_gen = list(label_generator)
     print('isize', len(self.image_gen))
     print('lsize', len(self.label_gen))
+    if not len(self.image_gen) == len(self.label_gen):
+      raise ValueError('mismatch in inputs')
     self.transform = transforms.Compose(transforms_in)
 
   def __getitem__(self, index):
@@ -26,14 +28,11 @@ class ProgressiveLoader:
 
 
 def train(images_generator, labels_generator, network, optimizer, loss_function, epochs):
+    images_generator = (i.result for i in images_generator)
+    labels_generator = (i.result for i in labels_generator)
     network = network.cuda()
     optimizer, scheduler = optimizer
-    images_generator = list(images_generator)
-    labels_generator = list(labels_generator)
-    file_names = set([f.name for f in images_generator]).intersection(set([f.name for f in labels_generator]))
-    filtered_images = [file_to_image(i.result) for i in images_generator if i.name in file_names]
-    filtered_labels = [file_to_annotation_image(i.result) for i in labels_generator if i.name in file_names]
-    dataset = ProgressiveLoader(filtered_images, filtered_labels, [
+    dataset = ProgressiveLoader(images_generator, labels_generator, [
         transforms.Resize((224,224)),
         transforms.ToTensor()
     ])
