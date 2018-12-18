@@ -27,7 +27,7 @@ class ProgressiveLoader:
     return len(self.image_gen)
 
 
-def train(images_generator, labels_generator, network, optimizer, loss_function, epochs):
+def train(images_generator, labels_generator, network, loss_function, optimizer, epochs):
   images_generator = (i.result for i in images_generator)
   labels_generator = (i.result for i in labels_generator)
   network = network.cuda()
@@ -56,10 +56,3 @@ def train(images_generator, labels_generator, network, optimizer, loss_function,
       optimizer.zero_grad()
   print('DONE')
   yield network
-
-#   def save_onnx(self, f):
-#     dummy_input = Variable(torch.randn(4, 3, 224, 224)).cuda()
-#     torch.onnx.export(self.network, dummy_input, f, verbose=True)
-
-#   def save_pth(self, f):
-#     torch.save(self.network, f)
