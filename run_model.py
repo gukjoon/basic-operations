@@ -2,14 +2,13 @@ import torch
 from PIL import ImageMath
 import torchvision.transforms as transforms
 
-class ProgressiveLoader:
+class ModelRunLoader:
   def __init__(self, image_generator, transforms_in):
     self.image_gen = list(image_generator)
     self.transform = transforms.Compose(transforms_in)
 
   def __getitem__(self, index):
     image = self.image_gen[index].result
-    print(image)
     return self.transform(image)
 
   def name_for(self, index):
@@ -19,7 +18,11 @@ class ProgressiveLoader:
     return len(self.image_gen)
 
 # auto batches
-def model_state(images_generator, network, transforms_in):
+def run_model(images_generator, network):
+  transforms_in = [
+    transforms.Resize((224,224)),
+    transforms.ToTensor()
+  ]
   batch_size = 8
   # TODO: heh. deletes all errors? not great
   filtered_images = (i for i in images_generator if isinstance(i, PipelineSuccess))

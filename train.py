@@ -15,6 +15,7 @@ class ProgressiveLoader:
     print('isize', len(self.image_gen))
     print('lsize', len(self.label_gen))
     if not len(self.image_gen) == len(self.label_gen):
+      print('MISMATCH IN INPUTS')
       raise ValueError('mismatch in inputs')
     self.transform = transforms.Compose(transforms_in)
 
@@ -33,8 +34,8 @@ def train(images_generator, labels_generator, network, loss_function, optimizer,
   network = network.cuda()
   optimizer, scheduler = optimizer
   dataset = ProgressiveLoader(images_generator, labels_generator, [
-      transforms.Resize((224,224)),
-      transforms.ToTensor()
+    transforms.Resize((224,224)),
+    transforms.ToTensor()
   ])
 
   trainloader = torch.utils.data.DataLoader(
@@ -46,6 +47,7 @@ def train(images_generator, labels_generator, network, loss_function, optimizer,
   data_size = len(trainloader)
   
   for epoch in range(epochs):
+    print('EPOCH: ', epoch)
     for i, data in enumerate(trainloader, 0):
       inputs, labels = data
       inputs, labels = inputs.cuda(), labels.cuda()
