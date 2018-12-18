@@ -26,7 +26,7 @@ def run_model(images_generator, network):
   batch_size = 8
   # TODO: heh. deletes all errors? not great
   filtered_images = (i for i in images_generator if isinstance(i, PipelineSuccess))
-  dataset = ProgressiveLoader(filtered_images, transforms_in)
+  dataset = ModelRunLoader(filtered_images, transforms_in)
   loader = torch.utils.data.DataLoader(
     dataset, 
     batch_size=batch_size
