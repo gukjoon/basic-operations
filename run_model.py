@@ -28,7 +28,7 @@ def run_model(images_generator, network):
   filtered_images = (i for i in images_generator if isinstance(i, PipelineSuccess))
   dataset = ModelRunLoader(filtered_images, transforms_in)
   loader = torch.utils.data.DataLoader(
-    dataset, 
+    dataset,
     batch_size=batch_size
     # num_workers=2
   )
