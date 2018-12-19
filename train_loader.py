@@ -15,16 +15,14 @@ class TrainLoader:
     self.transform = transforms.Compose(transforms_in)
 
   def __getitem__(self, index):
-    image = self.image_gen[index]
-    image = Image.open(self.file_gen[index].result)
+    image = Image.open(self.image_gen[index].result)
     if not image.mode == 'RGB' and not image.mode == 'RGBA':
       image = ImageMath.eval('im/256', {'im':image}).convert('RGB')
     if image.mode == 'RGBA':
       background = Image.new('RGBA', image.size, (255,255,255))
       image = Image.alpha_composite(background, image).convert('RGB')
-
-    label = self.label_gen[index]
-    label = Image.open(file)
+      
+    label = Image.open(self.label_gen[index].result)
     if label.mode == 'RGBA':
       r, g, b, a = label.split()
       label = Image.merge('RGB', (a, a, a))
