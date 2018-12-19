@@ -9,9 +9,14 @@ from tensorboardX import SummaryWriter
 from torchvision import transforms
 
 
-def train(trainloader, network, loss_function, optimizer, epochs):
+def train(dataset, network, loss_function, optimizer, epochs):
   network = network.cuda()
   optimizer, scheduler = optimizer
+  trainloader = torch.utils.data.DataLoader(
+    dataset, 
+    batch_size=8
+    # num_workers=2
+  )  
 
   data_size = len(trainloader)
   

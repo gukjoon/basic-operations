@@ -2,9 +2,16 @@ import torch
 import torchvision.transforms as transforms
 
 # auto batches
-def run_model(loader, network):
+def run_model(dataset, network):
   if torch.cuda.is_available():
     network = network.cuda()
+
+  batch_size = 8
+  loader = torch.utils.data.DataLoader(
+    dataset,
+    batch_size=batch_size
+    # num_workers=2
+  )
 
   for i, tensor in enumerate(loader):
     if torch.cuda.is_available():

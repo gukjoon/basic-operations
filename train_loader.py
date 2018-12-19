@@ -21,7 +21,7 @@ class TrainLoader:
     if image.mode == 'RGBA':
       background = Image.new('RGBA', image.size, (255,255,255))
       image = Image.alpha_composite(background, image).convert('RGB')
-      
+
     label = Image.open(self.label_gen[index].result)
     if label.mode == 'RGBA':
       r, g, b, a = label.split()
@@ -37,9 +37,4 @@ def train_loader(images_generator, labels_generator):
     transforms.ToTensor()
   ])
 
-  trainloader = torch.utils.data.DataLoader(
-    dataset, 
-    batch_size=8
-    # num_workers=2
-  )
-  return trainloader
+  return dataset

@@ -31,12 +31,7 @@ def run_loader(files_generator):
     transforms.Resize((224,224)),
     transforms.ToTensor()
   ]
-  batch_size = 8
-  # TODO: heh. deletes all errors? not great
+  
   dataset = ModelRunLoader(files_generator, transforms_in)
-  loader = torch.utils.data.DataLoader(
-    dataset,
-    batch_size=batch_size
-    # num_workers=2
-  )
-  return loader
+
+  return dataset
