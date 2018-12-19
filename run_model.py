@@ -14,7 +14,7 @@ class ModelRunLoader:
     if not image.mode == 'RGB' and not image.mode == 'RGBA':
       image = ImageMath.eval('im/256', {'im':image}).convert('RGB')
     if image.mode == 'RGBA':
-      background = Image.new('RGBA', image.size, (255,255,255))
+      background = Image.new('RGB', image.size, (255,255,255))
       image = Image.alpha_composite(background, image)
     return self.transform(image)
 
