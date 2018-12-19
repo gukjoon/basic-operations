@@ -1,5 +1,4 @@
-import torch
+import torchvision.transforms as transforms
 
 def image_to_tensor(image):
-  tensor = transforms.ToTensor()(image)
-  return tensor
+  return transforms.ToTensor()(image)
