@@ -3,30 +3,33 @@ from PIL import ImageMath
 import torchvision.transforms as transforms
 
 class ModelRunLoader:
-  def __init__(self, image_generator, transforms_in):
-    self.image_gen = list(image_generator)
+  def __init__(self, files_generator, transforms_in):
+    self.file_gen = list(files_generator)
     self.transform = transforms.Compose(transforms_in)
 
   def __getitem__(self, index):
-    image = self.image_gen[index].result
+    # TODO: this is a dupe of file_to_image
+    # Better to have injection?
+    image = Image.open(self.file_gen[index].result)
+    if not image.mode == 'RGB' and not image.mode == 'RGBA':
+      image = ImageMath.eval('im/256', {'im':image}).convert('RGB')
     return self.transform(image)
 
   def name_for(self, index):
-    return self.image_gen[index].name
+    return self.file_gen[index].name
 
   def __len__(self):
-    return len(self.image_gen)
+    return len(self.file_gen)
 
 # auto batches
-def run_model(images_generator, network):
+def run_model(files_generator, network):
   transforms_in = [
     transforms.Resize((224,224)),
     transforms.ToTensor()
   ]
   batch_size = 8
   # TODO: heh. deletes all errors? not great
-  filtered_images = (i for i in images_generator if isinstance(i, PipelineSuccess))
-  dataset = ModelRunLoader(filtered_images, transforms_in)
+  dataset = ModelRunLoader(files_generator, transforms_in)
   loader = torch.utils.data.DataLoader(
     dataset,
     batch_size=batch_size
