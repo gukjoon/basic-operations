@@ -7,4 +7,4 @@ def extract_labels(file_gen, id_extractor):
     for idx, i in in_data.iterrows():
       id_raw = i[0]
       label_raw = i[1]
-      yield PipelineSuccess(id_extractor % id_raw, label_raw)
+      yield PipelineSuccess(id_extractor % id_raw, bytes(label_raw, 'utf-8'))
