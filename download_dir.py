@@ -14,7 +14,6 @@ def download_dir(file_gen, id_col, url_col):
         res = requests.get(url, stream=True)
         if res.status_code == requests.codes.ok:
           yield PipelineSuccess(
-            obj.base, 
             name,
             res.iter_content(chunk_size=1024)
           )
