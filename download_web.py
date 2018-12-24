@@ -1,9 +1,9 @@
 import requests
-import urlparse
+from urllib.parse import urlparse
 
 def download_web(url):
   res = requests.get(url, stream=True)
-  name = urlparse.urlparse(url).path
+  name = urlparse(url).path
   if res.status_code == requests.codes.ok:
     yield PipelineSuccess(
       name,
