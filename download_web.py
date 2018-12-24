@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 def download_web(url):
   dl = 0
   def progress(data):
+    nonlocal dl 
     dl += len(data)
     if dl % 100000 == 0:
       print(dl)
