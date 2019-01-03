@@ -1,5 +1,6 @@
 import requests
 from urllib.parse import urlparse
+import os
 
 def download_web(url):
   dl = 0
@@ -11,7 +12,7 @@ def download_web(url):
     return data
 
   res = requests.get(url, stream=True)
-  name = urlparse(url).path
+  name = os.path.basename(urlparse(url).path)
   if res.status_code == requests.codes.ok:
     with_progress = (progress(data) for data in res.iter_content(chunk_size=1024))
     yield PipelineSuccess(
