@@ -4,5 +4,5 @@ args:
   file_generator: 
     type: file
 output:
-  type: file
+  type: bytes
 reducer: true
