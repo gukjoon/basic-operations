@@ -9,3 +9,4 @@ args:
     type: int
 output:
   type: file
+reducer: true
