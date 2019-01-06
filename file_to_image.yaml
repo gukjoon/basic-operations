@@ -1,0 +1,10 @@
+description: 
+  Opens a file as an image
+  Assumes id in first column, label in the second.
+args:
+  file: 
+    type: file
+    description: image file
+output:
+  type: image
+

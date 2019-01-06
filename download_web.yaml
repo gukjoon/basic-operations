@@ -1,0 +1,8 @@
+description: Download a url
+args:
+  url: 
+    type: string
+    description: url to download
+output:
+  type: bytes
+reducer: true

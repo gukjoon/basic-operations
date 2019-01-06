@@ -1,0 +1,11 @@
+description: 
+  Performs an intersection between lhs and rhs. 
+  Every file in lhs that is also in rhs will be output
+args:
+  lhs: 
+    type: file
+  rhs:
+    type: file
+output:
+  type: file
+reducer: true

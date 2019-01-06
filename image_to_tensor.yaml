@@ -1,0 +1,8 @@
+description: 
+  Converts image to tensor
+args:
+  image: 
+    type: image
+    description: PIL Image object
+output:
+  type: tensor

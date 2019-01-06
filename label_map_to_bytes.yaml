@@ -1,0 +1,7 @@
+description: 
+  Spits out a label_map in bytes
+args:
+  label_map: 
+    type: label_map
+output:
+  type: bytes

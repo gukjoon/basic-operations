@@ -1,0 +1,13 @@
+description: 
+  Extract labels from CSV file(s) and splits into files. 
+  Assumes id in first column, label in the second.
+args:
+  file_gen: 
+    type: file
+    description: CSVs
+  id_extractor:
+    type: string
+    description: A string format of style "blah%sblah" where %s will be replaced by id
+output:
+  type: bytes
+reducer: true

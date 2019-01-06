@@ -1,0 +1,12 @@
+description: 
+  Loads a file as a model
+args:
+  file: 
+    type: file
+    description: Pytorch model file
+  network:
+    type: model
+    description: empty model
+output:
+  type: model
+reducer: true

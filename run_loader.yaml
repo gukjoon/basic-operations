@@ -1,0 +1,7 @@
+description: 
+  Creates a PyTorch data loader for prediction
+args:
+  files_generator: 
+    type: file
+output:
+  type: loader

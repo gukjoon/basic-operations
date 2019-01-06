@@ -1,11 +1,14 @@
-description: Mr dobalina mr bob dobalina
+description: Download a CSV file with one column as id and one column as url
 args:
   file_gen: 
     type: file
-    description: test
+    description: CSV file
   id_col:
     type: int
+    description: Column for the id
   url_col: 
     type: int
+    description: Column for the url
 output:
   type: bytes
+reducer: true

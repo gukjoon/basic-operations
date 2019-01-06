@@ -1,0 +1,7 @@
+description: 
+  Calculates the size of a label map
+args:
+  label_map: 
+    type: label_map
+output:
+  type: int

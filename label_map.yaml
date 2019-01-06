@@ -1,0 +1,9 @@
+description: 
+  Generates a label map.
+args:
+  label_gen: 
+    type: file
+    description: Label files
+output:
+  type: label_map
+reducer: true

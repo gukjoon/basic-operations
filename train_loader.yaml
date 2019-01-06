@@ -1,0 +1,9 @@
+description: 
+  Pytorch loader for training
+args:
+  images_generator: 
+    type: file
+  labels_generator:
+    type: file
+output:
+  type: loader

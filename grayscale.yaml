@@ -1,0 +1,8 @@
+description: 
+  Converts image to grayscale
+args:
+  image: 
+    type: image
+    description: RGB image file
+output:
+  type: model

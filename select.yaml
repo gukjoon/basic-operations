@@ -1,0 +1,10 @@
+description: 
+  Select files based on a filter (uses startswith)
+args:
+  file_generator: 
+    type: file
+  str_filter:
+    type: string
+output:
+  type: file
+reducer: true

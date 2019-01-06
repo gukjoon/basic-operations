@@ -1,0 +1,17 @@
+description: 
+  Run training
+args:
+  dataset: 
+    type: label_map
+  network:
+    type: model
+  loss_function:
+    type: loss-function
+  optimizer:
+    type: optimizer
+  epochs:
+    type: int
+output:
+  type: model
+reducer: true
+gpu: true

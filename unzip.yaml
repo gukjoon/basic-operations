@@ -1,0 +1,8 @@
+description: 
+  Unzips file/files
+args:
+  file_generator: 
+    type: file
+output:
+  type: file
+reducer: true

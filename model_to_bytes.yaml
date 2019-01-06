@@ -1,0 +1,7 @@
+description: 
+  Serializes a Pytorch model to bytes
+args:
+  model: 
+    type: model
+output:
+  type: bytes

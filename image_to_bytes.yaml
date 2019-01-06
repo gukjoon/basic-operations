@@ -1,0 +1,8 @@
+description: 
+  Saves image to bytes
+args:
+  img: 
+    type: image
+    description: RGB image file
+output:
+  type: bytes

@@ -1,0 +1,12 @@
+description: 
+  Run a model over a loader
+args:
+  dataset: 
+    type: loader
+  network:
+    type: model
+output:
+  type: tensor
+reducer: true
+gpu: true
+
