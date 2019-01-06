@@ -1,0 +1,11 @@
+description: Mr dobalina mr bob dobalina
+args:
+  file_gen: 
+    type: file
+    description: test
+  id_col:
+    type: int
+  url_col: 
+    type: int
+output:
+  type: bytes
