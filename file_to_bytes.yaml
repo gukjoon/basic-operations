@@ -1,0 +1,7 @@
+description: 
+  Convert file to bytes. Self-explanatory.
+args:
+  file: 
+    type: file
+output:
+  type: bytes
