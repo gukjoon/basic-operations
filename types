@@ -1,0 +1,15 @@
+types:
+  int:
+    args:
+  list:
+    args:
+      - a
+  tup2:
+    args:
+      - a
+      - b
+  tup3:
+    args:
+      - a
+      - b
+      - c
