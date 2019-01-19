@@ -3,13 +3,13 @@ types:
     args:
   list:
     args:
-      - a
+      - any
   tup2:
     args:
-      - a
-      - b
+      - any
+      - any
   tup3:
     args:
-      - a
-      - b
-      - c
+      - any
+      - any
+      - any
